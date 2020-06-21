@@ -22,7 +22,16 @@ namespace LinkedListPart2
 
         public bool Contains(T val)
         {
-            throw new NotImplementedException();
+            Node<T> current = head;
+            for (int i = 0; i < count; i++, current = current.next)
+            {
+                if(val.Equals(current.value))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
