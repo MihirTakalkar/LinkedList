@@ -20,9 +20,9 @@ namespace LinkedListPart2
 
         }
 
-        public bool Contains(;
+        public bool Contains(T val)
         {
-
+            throw new NotImplementedException();
         }
     }
 }
