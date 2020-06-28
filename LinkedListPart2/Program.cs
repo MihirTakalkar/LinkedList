@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LinkedListPart2
 {
@@ -43,23 +44,6 @@ namespace LinkedListPart2
 
         static void Main(string[] args)
         {
-            Node<int> n = new Node<int>(5);
-
-            Console.WriteLine(n.value);
-
-
-            Node<int> j = new Node<int>(6);
-
-            Console.WriteLine(j.value);
-
-            Node<int> k = n;
-
-            Console.WriteLine(k.value);
-
-            k = j;
-
-            Console.WriteLine(k.value);
-
 
         }
     }
