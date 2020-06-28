@@ -14,6 +14,11 @@ namespace LinkedListPart2
             this.value = value;
         }
 
+        public override string ToString()
+        {
+            return $"Value: {value}, Next: {next?.value.ToString() ?? "null"}";
+        }
+
     }
 
     

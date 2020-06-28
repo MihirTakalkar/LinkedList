@@ -8,109 +8,144 @@ namespace LinkedListPart2
 {
     class LinkedList<T>
     {
-        public Node<T> head;
-        public Node<T> tail;
-        public int count;
+        public Node<T> Head { get; private set; }
+        public Node<T> Tail { get; private set; }
+        public int Count { get; private set; }
 
         public LinkedList()
         {
-            this.count = 0;
+            this.Count = 0;
         }
 
         public void AddFirst(T value)
         {
-            if(head == null)
+            if (Head == null)
             {
-                head = new Node<T>(value);
+                Head = new Node<T>(value);
+                Tail = Head;
+                Count++;
             }
 
             else
             {
-                T temp = head.value;
-                head = new Node<T>(value);
-                head.next = new Node<T>(temp);
+                var newnode = new Node<T>(value);
+                newnode.next = Head;
+                Head = newnode;
+                Count++;
+
             }
         }
 
         public void AddLast(T value)
         {
-            if(head == null)
+            if (Head == null)
             {
-                head = new Node<T>(value);
+                Head = new Node<T>(value);
+                Tail = Head;
+                Count++;
             }
 
             else
             {
-                T temp = tail.value;
-                tail = new Node<T>(value);
-                tail.next = new Node<T>(temp);
+                var newnode = new Node<T>(value);
+                Tail.next = newnode;
+                Tail = newnode;
+                Count++;
+
             }
         }
 
         public void AddBefore(Node<T> given, T value)
         {
-            var currentNode = head;
+            var currentNode = Head;
             while ((currentNode.next != null))
             {
-                if(currentNode.next == given)
+                if (currentNode.next == given)
                 {
                     Node<T> newnode = new Node<T>(value);
                     newnode.next = given;
                     currentNode.next = newnode;
-                }
-
-                else
-                {
-                    currentNode = currentNode.next; 
-                }
-                
-            }
-        }
-
-        public void AddAfter(Node<T> given, T value)
-        {
-            var currentNode = head;
-            while(currentNode.next != null)
-            {
-                if(currentNode == given)
-                {
-                    Node<T> newnode = new Node<T>(value);
-                    newnode.next = currentNode.next;
-                    currentNode.next = newnode;
+                    Count++;
                 }
 
                 else
                 {
                     currentNode = currentNode.next;
                 }
+
             }
         }
 
-        public bool RemoveFirst() 
+        public void AddAfter(T givenValue, T value)
         {
-            if(head.value == null)
+            Node<T> given = Head;
+
+            while (given != null)
+            {
+                if (given.value.Equals(value))
+                {
+                    break;
+                }
+
+                given = given.next;
+            }
+            
+
+            if (Tail == given || given == null)
+            {
+                AddLast(value);
+                return;
+            }
+
+            var newnode = new Node<T>(value);
+            newnode.next = given.next;
+            given.next = newnode;
+            Count++;
+            //var currentNode = Head;
+
+            //while (currentNode.next != null)
+            //{
+            //    if (currentNode == given)
+            //    {
+            //        Node<T> newnode = new Node<T>(value);
+            //        newnode.next = currentNode.next;
+            //        currentNode.next = newnode;
+            //        Count++;
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        currentNode = currentNode.next;
+            //    }
+            //}
+        }
+
+        public bool RemoveFirst()
+        {
+            if (Head.value == null)
             {
                 return false;
             }
 
             else
             {
-                head = head.next;
+                Head = Head.next;
             }
             return true;
         }
 
-        public bool RemoveLast()
-        {
+        //public bool RemoveLast()
+        //{
 
-        }
+        //}
 
         public bool Contains(T val)
         {
-            Node<T> current = head;
-            for (int i = 0; i < count; i++, current = current.next)
+            Node<T> current = Head;
+
+            for (int i = 0; i < Count; i++, current = current.next)
             {
-                if(val.Equals(current.value))
+                if (val.Equals(current.value))
                 {
                     return true;
                 }
