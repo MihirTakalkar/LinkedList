@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
+using System.Transactions;
 
 namespace LinkedListPart2
 {
@@ -82,7 +83,7 @@ namespace LinkedListPart2
 
             while (given != null)
             {
-                if (given.value.Equals(value))
+                if (given.value.Equals(givenValue))
                 {
                     break;
                 }
@@ -130,14 +131,76 @@ namespace LinkedListPart2
             else
             {
                 Head = Head.next;
+                Count--;
             }
             return true;
         }
 
-        //public bool RemoveLast()
-        //{
+        public bool RemoveLast()
+        {
+            var currentNode = Head;
+            if (currentNode == null)
+            {
+                return false;
+            }
 
-        //}
+            else
+            {
+                while (currentNode.next != Tail)
+                {
+                    currentNode = currentNode.next;
+                }
+                currentNode.next = null;
+                Tail = currentNode;
+                //update count then return true
+                Count--;
+                return true;
+            }
+        }
+
+        public bool Remove(T value)
+        {
+            if(Head.value.Equals(value))
+            {
+                RemoveFirst();
+                Count--;
+                return true;
+            }
+            else if(Head.value == null)
+            {
+                return false;
+            }
+
+            else
+            {
+                var currentNode = Head;
+                while (currentNode.next != null && currentNode != Tail)
+                {
+                    if (currentNode.next.value.Equals(value))
+                    {
+                        currentNode.next = currentNode.next.next;
+                        Count--;
+                        return true;
+                        
+
+                    }
+
+                    else
+                    {
+                        currentNode = currentNode.next;
+                    }
+                }
+                return false;
+            }
+        }
+
+        public void Clear()
+        {
+            Head = null;
+            Tail = null;
+            Count = 0;
+        }
+
 
         public bool Contains(T val)
         {
@@ -152,6 +215,24 @@ namespace LinkedListPart2
             }
 
             return false;
+        }
+
+        Node<T> Search(T value)
+        {
+            var currentNode = Head;
+            while(currentNode.next != null)
+            {
+                if (currentNode.value.Equals(value))
+                {
+                    return currentNode;
+                }
+
+                else
+                {
+                    currentNode = currentNode.next;
+                }
+            }
+            return null;
         }
     }
 }

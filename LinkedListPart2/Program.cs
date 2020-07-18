@@ -18,6 +18,8 @@ namespace LinkedListPart2
             list.AddAfter(3, 66);
             list.AddAfter(1, 55);
 
+            list.Remove(55);
+
             for (int i = 0; i < 100; i++)
             {
                 test = list.Contains(i);
@@ -28,6 +30,15 @@ namespace LinkedListPart2
                 }
             }
 
+            list.Clear();
+            list.AddFirst(1);
+            list.AddLast(4);
+            for (int i = 0; i < 10; i++)
+            {
+                test = list.Contains(i);
+                Console.WriteLine($"Value: {i} = {test}");
+            }
+       
         }
     }
 }
